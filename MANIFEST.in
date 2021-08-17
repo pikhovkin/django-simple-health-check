@@ -1,0 +1,5 @@
+recursive-include simple_health_check *
+include README.md
+include LICENSE
+global-exclude __pycache__
+global-exclude *.py[co]
