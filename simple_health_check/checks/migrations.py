@@ -9,9 +9,12 @@ from ..exceptions import HealthCheckError
 
 class Migrations(BaseHealthCheck):
     def __init__(self, alias: Optional[str] = None):
+        super().__init__()
         self.alias = alias
 
     def check(self):
+        if self.alias:
+            connections[self.alias]
         try:
             for connection in connections.all():
                 if self.alias and connection.alias != self.alias:

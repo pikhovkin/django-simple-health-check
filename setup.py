@@ -7,7 +7,7 @@ except ImportError:
 
 setup(
     name='django-simple-health-check',
-    version='0.1.0',
+    version='0.2.0',
     description='Simple Django health check',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
