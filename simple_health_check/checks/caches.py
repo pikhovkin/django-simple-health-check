@@ -1,6 +1,7 @@
 from typing import Optional
 
 from django.core.cache import CacheKeyWarning, caches
+from django.conf import settings
 
 from . import BaseHealthCheck
 from ..exceptions import HealthCheckError
@@ -15,7 +16,7 @@ class CacheBackends(BaseHealthCheck):
         if self.alias:
             caches[self.alias]
         try:
-            for alias in caches:
+            for alias in getattr(settings, 'CACHES', {}).keys():
                 if self.alias and alias != self.alias:
                     continue
 
