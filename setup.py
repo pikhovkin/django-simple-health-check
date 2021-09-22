@@ -7,7 +7,7 @@ except ImportError:
 
 setup(
     name='django-simple-health-check',
-    version='0.2.0',
+    version='0.3.0',
     description='Simple Django health check',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -21,6 +21,9 @@ setup(
     install_requires=[
         'Django>=3.1,<4.0',
     ],
+    extras_require={
+        'psutil': ['psutil'],
+    },
     python_requires='>=3.7.*, <4.0.*',
     license='MIT',
     zip_safe=False,

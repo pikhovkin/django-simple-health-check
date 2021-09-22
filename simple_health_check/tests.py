@@ -74,3 +74,75 @@ class SimpleTest(TestCase):
         response = self.client.get('/readiness/')
         self.assertTrue(response.status_code == 500)
         self.assertTrue(response.content == b'down')
+
+    @override_settings(
+        SIMPLE_HEALTH_CHECKS={
+            'simple_health_check.checks.ps.DiskUsage': None,
+        },
+    )
+    def test_ps_disk_usage_no_value(self):
+        apps.get_app_config('simple_health_check').register_checks()
+
+        response = self.client.get('/readiness/')
+        self.assertTrue(response.status_code == 200)
+        self.assertTrue(response.content == b'ok')
+
+    @override_settings(
+        SIMPLE_HEALTH_CHECKS={
+            'simple_health_check.checks.ps.DiskUsage': dict(max_usage_percent=99),
+        },
+    )
+    def test_ps_disk_usage(self):
+        apps.get_app_config('simple_health_check').register_checks()
+
+        response = self.client.get('/readiness/')
+        self.assertTrue(response.status_code == 200)
+        self.assertTrue(response.content == b'ok')
+
+    @override_settings(
+        SIMPLE_HEALTH_CHECKS={
+            'simple_health_check.checks.ps.DiskUsage': dict(max_usage_percent=0.001),
+        },
+    )
+    def test_ps_disk_usage_no_rediness(self):
+        apps.get_app_config('simple_health_check').register_checks()
+
+        response = self.client.get('/readiness/')
+        self.assertTrue(response.status_code == 500)
+        self.assertTrue(response.content == b'down')
+
+    @override_settings(
+        SIMPLE_HEALTH_CHECKS={
+            'simple_health_check.checks.ps.MemoryUsage': None,
+        },
+    )
+    def test_ps_memory_usage_no_value(self):
+        apps.get_app_config('simple_health_check').register_checks()
+
+        response = self.client.get('/readiness/')
+        self.assertTrue(response.status_code == 200)
+        self.assertTrue(response.content == b'ok')
+
+    @override_settings(
+        SIMPLE_HEALTH_CHECKS={
+            'simple_health_check.checks.ps.MemoryUsage': dict(min_memory_mb=10),
+        },
+    )
+    def test_ps_memory_usage(self):
+        apps.get_app_config('simple_health_check').register_checks()
+
+        response = self.client.get('/readiness/')
+        self.assertTrue(response.status_code == 200)
+        self.assertTrue(response.content == b'ok')
+
+    @override_settings(
+        SIMPLE_HEALTH_CHECKS={
+            'simple_health_check.checks.ps.MemoryUsage': dict(min_memory_mb=100_000),
+        },
+    )
+    def test_ps_memory_usage_no_rediness(self):
+        apps.get_app_config('simple_health_check').register_checks()
+
+        response = self.client.get('/readiness/')
+        self.assertTrue(response.status_code == 500)
+        self.assertTrue(response.content == b'down')
