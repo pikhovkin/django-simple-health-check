@@ -69,7 +69,7 @@ SIMPLE_HEALTH_CHECKS = {
 
 ### Built-in checks
 
-| Check                                            |     Built-in/expected    |
+| A check                                          |     Built-in/expected    |
 |--------------------------------------------------|:------------------------:|
 | simple_health_check.checks.db.Databases          |    :heavy_check_mark:    |
 | simple_health_check.checks.migrations.Migrations |    :heavy_check_mark:    |
