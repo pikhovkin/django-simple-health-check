@@ -87,6 +87,8 @@ SIMPLE_HEALTH_CHECKS = {
 | queues                                           | :hourglass_flowing_sand: |
 | storages                                         | :hourglass_flowing_sand: |
 
+> Use `pip install django-simple-health-check[psutil]` for using `simple_health_check.checks.ps.*` checks.
+
 ## License
 
 MIT
