@@ -69,15 +69,15 @@ SIMPLE_HEALTH_CHECKS = {
 
 ### Built-in checks
 
-| Check                                            | Built-in/expected        |
-|--------------------------------------------------|--------------------------|
-| simple_health_check.checks.db.Databases          | :heavy_check_mark:       |
-| simple_health_check.checks.migrations.Migrations | :heavy_check_mark:       |
-| simple_health_check.checks.caches.CacheBackends  | :heavy_check_mark:       |
-| simple_health_check.checks.ps.DiskUsage          | :heavy_check_mark:       |
-| simple_health_check.checks.ps.MemoryUsage        | :heavy_check_mark:       |
-| simple_health_check.checks.dummy.DummyTrue       | :heavy_check_mark:       |
-| simple_health_check.checks.dummy.DummyFalse      | :heavy_check_mark:       |
+| Check                                            |     Built-in/expected    |
+|--------------------------------------------------|:------------------------:|
+| simple_health_check.checks.db.Databases          |    :heavy_check_mark:    |
+| simple_health_check.checks.migrations.Migrations |    :heavy_check_mark:    |
+| simple_health_check.checks.caches.CacheBackends  |    :heavy_check_mark:    |
+| simple_health_check.checks.ps.DiskUsage          |    :heavy_check_mark:    |
+| simple_health_check.checks.ps.MemoryUsage        |    :heavy_check_mark:    |
+| simple_health_check.checks.dummy.DummyTrue       |    :heavy_check_mark:    |
+| simple_health_check.checks.dummy.DummyFalse      |    :heavy_check_mark:    |
 | emails                                           | :hourglass_flowing_sand: |
 | queues                                           | :hourglass_flowing_sand: |
 | storages                                         | :hourglass_flowing_sand: |
