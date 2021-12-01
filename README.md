@@ -32,6 +32,7 @@ $ pip install django-simple-health-check
 INSTALLED_APPS = [
     ...,
     'simple_health_check',
+    ...,
 ]
 ```
 
@@ -43,6 +44,7 @@ from django.urls import path, include
 urlpatterns = [
     ...,
     path('', include('simple_health_check.urls')),
+    ...,
 ]
 ```
 
@@ -55,6 +57,9 @@ SIMPLE_HEALTH_CHECKS = {
         dict(alias='db2'),
     ],
     'simple_health_check.checks.db.Databases': None,
+
+    # The simplest way to add your own check 
+    'your_package.path_to_checks.SomeCheck': {...} or [{...}, ...] or None,  
 }
 ```
 
