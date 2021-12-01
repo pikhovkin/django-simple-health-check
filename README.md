@@ -56,7 +56,7 @@ urlpatterns = [
 ```python
 SIMPLE_HEALTH_CHECKS = {
     'simple_health_check.checks.migrations.Migrations': [
-        dict(alias='db1'),
+        dict(alias='default'),
         dict(alias='db2'),
     ],
     'simple_health_check.checks.db.Databases': None,

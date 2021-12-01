@@ -1,9 +1,10 @@
 import logging
 
 from django.views import View
-from django.http import HttpResponse, JsonResponse, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseServerError
 
 from .apps import SimpleHealthCheckConfig
+from . import settings
 
 
 logger = logging.getLogger(__name__)
@@ -23,6 +24,6 @@ class Readiness(View):
         try:
             SimpleHealthCheckConfig.check_all()
         except Exception as e:
-            logger.error(e)
-            return HttpResponseServerError('down')
+            logger.exception(e)
+            return HttpResponseServerError('down', status=settings.ERROR_CODE)
         return HttpResponse('ok')

@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 from django.conf import settings
-from django.core.signals import setting_changed
 from django.utils.module_loading import import_string
 
 
@@ -10,7 +9,7 @@ class SimpleHealthCheckConfig(AppConfig):
     checks = {}
 
     @classmethod
-    def register_checks(cls, **kwargs):
+    def register_checks(cls):
         cls.checks = {}
         SIMPLE_HEALTH_CHECKS = getattr(settings, 'SIMPLE_HEALTH_CHECKS', None)
         if SIMPLE_HEALTH_CHECKS is None:
@@ -44,6 +43,3 @@ class SimpleHealthCheckConfig(AppConfig):
 
     def ready(self):
         self.register_checks()
-
-
-setting_changed.connect(SimpleHealthCheckConfig.register_checks)

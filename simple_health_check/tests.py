@@ -13,6 +13,14 @@ class SimpleTest(TestCase):
     @override_settings(SIMPLE_HEALTH_CHECKS={'simple_health_check.checks.dummy.DummyFalse': None})
     def test_no_readiness(self):
         response = self.client.get('/readiness/')
+        self.assertContains(response, b'down', status_code=503)
+
+    @override_settings(
+        SIMPLE_HEALTH_CHECK_ERROR_CODE=500,
+        SIMPLE_HEALTH_CHECKS={'simple_health_check.checks.dummy.DummyFalse': None},
+    )
+    def test_other_error_code(self):
+        response = self.client.get('/readiness/')
         self.assertContains(response, b'down', status_code=500)
 
     @override_settings(
@@ -54,7 +62,7 @@ class SimpleTest(TestCase):
     )
     def test_cache_no_rediness(self):
         response = self.client.get('/readiness/')
-        self.assertContains(response, b'down', status_code=500)
+        self.assertContains(response, b'down', status_code=503)
 
     @override_settings(
         SIMPLE_HEALTH_CHECKS={
@@ -81,7 +89,7 @@ class SimpleTest(TestCase):
     )
     def test_ps_disk_usage_no_rediness(self):
         response = self.client.get('/readiness/')
-        self.assertContains(response, b'down', status_code=500)
+        self.assertContains(response, b'down', status_code=503)
 
     @override_settings(
         SIMPLE_HEALTH_CHECKS={
@@ -108,4 +116,4 @@ class SimpleTest(TestCase):
     )
     def test_ps_memory_usage_no_rediness(self):
         response = self.client.get('/readiness/')
-        self.assertContains(response, b'down', status_code=500)
+        self.assertContains(response, b'down', status_code=503)
