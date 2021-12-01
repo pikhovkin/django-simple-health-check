@@ -58,8 +58,8 @@ SIMPLE_HEALTH_CHECKS = {
     ],
     'simple_health_check.checks.db.Databases': None,
 
-    # The simplest way to add your own check 
-    'your_package.path_to_checks.SomeCheck': {...} or [{...}, ...] or None,  
+    # The simplest way to add your own check
+    'your_package.path_to_checks.SomeCheck': {...} or [{...}, ...] or None,
 }
 ```
 
