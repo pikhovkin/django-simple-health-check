@@ -1,29 +1,19 @@
 from django.test import TestCase, override_settings
-from django.apps import apps
 
 
 class SimpleTest(TestCase):
     def test_liveness(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/liveness/')
-        self.assertTrue(response.status_code == 200)
-        self.assertTrue(response.content == b'ok')
+        self.assertContains(response, b'ok')
 
     def test_readiness(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 200)
-        self.assertTrue(response.content == b'ok')
+        self.assertContains(response, b'ok')
 
     @override_settings(SIMPLE_HEALTH_CHECKS={'simple_health_check.checks.dummy.DummyFalse': None})
     def test_no_readiness(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 500)
-        self.assertTrue(response.content == b'down')
+        self.assertContains(response, b'down', status_code=500)
 
     @override_settings(
         CACHES={
@@ -32,11 +22,8 @@ class SimpleTest(TestCase):
         SIMPLE_HEALTH_CHECKS={'simple_health_check.checks.caches.CacheBackends': None},
     )
     def test_caches(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 200)
-        self.assertTrue(response.content == b'ok')
+        self.assertContains(response, b'ok')
 
     @override_settings(
         CACHES={
@@ -51,11 +38,8 @@ class SimpleTest(TestCase):
         },
     )
     def test_cache_aliases(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 200)
-        self.assertTrue(response.content == b'ok')
+        self.assertContains(response, b'ok')
 
     @override_settings(
         CACHES={
@@ -69,11 +53,8 @@ class SimpleTest(TestCase):
         },
     )
     def test_cache_no_rediness(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 500)
-        self.assertTrue(response.content == b'down')
+        self.assertContains(response, b'down', status_code=500)
 
     @override_settings(
         SIMPLE_HEALTH_CHECKS={
@@ -81,11 +62,8 @@ class SimpleTest(TestCase):
         },
     )
     def test_ps_disk_usage_no_value(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 200)
-        self.assertTrue(response.content == b'ok')
+        self.assertContains(response, b'ok')
 
     @override_settings(
         SIMPLE_HEALTH_CHECKS={
@@ -93,11 +71,8 @@ class SimpleTest(TestCase):
         },
     )
     def test_ps_disk_usage(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 200)
-        self.assertTrue(response.content == b'ok')
+        self.assertContains(response, b'ok')
 
     @override_settings(
         SIMPLE_HEALTH_CHECKS={
@@ -105,11 +80,8 @@ class SimpleTest(TestCase):
         },
     )
     def test_ps_disk_usage_no_rediness(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 500)
-        self.assertTrue(response.content == b'down')
+        self.assertContains(response, b'down', status_code=500)
 
     @override_settings(
         SIMPLE_HEALTH_CHECKS={
@@ -117,11 +89,8 @@ class SimpleTest(TestCase):
         },
     )
     def test_ps_memory_usage_no_value(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 200)
-        self.assertTrue(response.content == b'ok')
+        self.assertContains(response, b'ok')
 
     @override_settings(
         SIMPLE_HEALTH_CHECKS={
@@ -129,11 +98,8 @@ class SimpleTest(TestCase):
         },
     )
     def test_ps_memory_usage(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 200)
-        self.assertTrue(response.content == b'ok')
+        self.assertContains(response, b'ok')
 
     @override_settings(
         SIMPLE_HEALTH_CHECKS={
@@ -141,8 +107,5 @@ class SimpleTest(TestCase):
         },
     )
     def test_ps_memory_usage_no_rediness(self):
-        apps.get_app_config('simple_health_check').register_checks()
-
         response = self.client.get('/readiness/')
-        self.assertTrue(response.status_code == 500)
-        self.assertTrue(response.content == b'down')
+        self.assertContains(response, b'down', status_code=500)

@@ -7,7 +7,7 @@ except ImportError:
 
 setup(
     name='django-simple-health-check',
-    version='0.3.0',
+    version='0.3.1',
     description='Simple Django health check',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -40,5 +40,10 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+    ],
+    keywords=[
+        'django', 'monitoring', 'healthcheck', 'health-check', 'ping', 'health-checks', 'healthchecks',
+        'liveness', 'readiness', 'liveness-detection', 'readiness-checker', 'django-health-check',
+        'readiness-detection', 'liveness-checker',
     ],
 )
