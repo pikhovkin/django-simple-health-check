@@ -7,7 +7,7 @@ except ImportError:
 
 setup(
     name='django-simple-health-check',
-    version='0.4.0',
+    version='0.5.0',
     description='Simple Django health check',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -19,7 +19,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        'Django>=3.1,<4.0',
+        'Django>=3.1,<4.2',
     ],
     extras_require={
         'psutil': ['psutil'],
@@ -32,6 +32,8 @@ setup(
         'Environment :: Web Environment',
         'Framework :: Django :: 3.1',
         'Framework :: Django :: 3.2',
+        'Framework :: Django :: 4.0',
+        'Framework :: Django :: 4.1',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
@@ -40,6 +42,7 @@ setup(
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
     ],
     keywords=[
         'django', 'monitoring', 'healthcheck', 'health-check', 'ping', 'health-checks', 'healthchecks',
