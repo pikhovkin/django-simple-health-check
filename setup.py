@@ -24,7 +24,7 @@ setup(
     extras_require={
         'psutil': ['psutil'],
     },
-    python_requires='>=3.7.*,<4.0.*',
+    python_requires='>=3.7,<4.0',
     license='MIT',
     zip_safe=False,
     classifiers=[
