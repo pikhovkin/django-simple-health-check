@@ -19,7 +19,7 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        'Django>=3.1,<4.3',
+        'Django>=3.1,<5.1',
     ],
     extras_require={
         'psutil': ['psutil'],
